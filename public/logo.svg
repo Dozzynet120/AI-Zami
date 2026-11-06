@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 100" role="img" aria-labelledby="title desc">
+  <title id="title">AI Zami Ventures &amp; Autos</title>
+  <desc id="desc">AI Zami Ventures and Autos brand mark</desc>
+  <rect x="2" y="7" width="82" height="82" rx="22" fill="#E65B32"/>
+  <path d="M20 65 39 27h9l19 38H54l-4-9H36l-4 9H20Zm20-18h7l-3.5-9L40 47Z" fill="#fff"/>
+  <path d="M93 26h9v49h-9z" fill="#202326"/>
+  <text x="116" y="48" font-family="Manrope,Arial,sans-serif" font-size="28" font-weight="800" fill="#202326">AI ZAMI</text>
+  <text x="117" y="70" font-family="DM Sans,Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="2.1" fill="#777D80">VENTURES &amp; AUTOS</text>
+</svg>
