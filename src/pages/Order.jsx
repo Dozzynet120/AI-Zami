@@ -13,9 +13,9 @@ function formatTime(seconds) {
 
 // Replace these configuration values with the business's verified commercial account details.
 const PAYMENT_DETAILS = {
-  bank: 'BUSINESS BANK NAME TO BE ADDED',
-  accountName: 'AI ZAMI VENTURES & AUTOS',
-  accountNumber: 'ACCOUNT NUMBER TO BE ADDED',
+  bank: 'Globu Bank',
+  accountName: 'Zami Automobile',
+  accountNumber: '2007447639',
 }
 
 export default function Order() {
@@ -140,12 +140,12 @@ export default function Order() {
           <div className="payment-modal-icon"><Clock3/></div>
           <span className="eyebrow">BANK TRANSFER INSTRUCTIONS</span>
           <h2 id="payment-title">Payment details</h2>
-          <p className="payment-intro">Use only the verified account details confirmed by our team and transfer the exact amount on your written quotation.</p>
+          <p className="payment-intro">Use the account details below and transfer only the amount stated on your written quotation.</p>
           <div className="payment-countdown"><small>PAYMENT WINDOW</small><strong>{formatTime(seconds)}</strong><span>{seconds > 0 ? 'Time remaining in this payment instruction window' : 'This instruction window has expired. Contact our team before making a transfer.'}</span></div>
           <div className="bank-detail"><small>BANK</small><strong>{PAYMENT_DETAILS.bank}</strong></div>
           <div className="bank-detail"><small>ACCOUNT NAME</small><strong>{PAYMENT_DETAILS.accountName}</strong></div>
           <div className="bank-detail account-number-row"><div><small>ACCOUNT NUMBER</small><strong>{PAYMENT_DETAILS.accountNumber}</strong></div><button type="button" onClick={copyAccount} className="copy-account"><Copy size={15}/>{copied ? 'Copied' : 'Copy'}</button></div>
-          <div className="payment-warning"><AlertCircle/><p><strong>Important:</strong> The business bank details above are placeholders until the verified commercial account details are supplied and configured. Do not transfer money to a placeholder or unverified account.</p></div>
+          <div className="payment-warning"><AlertCircle/><p><strong>Important:</strong> Confirm the account name and quoted amount with our team before transferring funds.</p></div>
           <button className="btn btn-primary form-submit" disabled={seconds === 0} onClick={sendOrderForVerification}>I have paid — send receipt for verification</button>
           <p className="form-disclaimer">The countdown is an instruction-window timer only. It does not verify a bank transfer, reserve a car or confirm payment. Payment must be checked by the business before an order is marked as paid.</p>
         </> : <div className="payment-submitted">

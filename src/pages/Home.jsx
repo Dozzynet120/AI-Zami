@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, ArrowUpRight, ShieldCheck, Globe2, ClipboardCheck, Headphones, CheckCircle2, CarFront, Ship, Search, BadgeCheck } from 'lucide-react'
 import SectionHeading from '../components/SectionHeading'
@@ -6,9 +7,24 @@ import WhatsAppLink from '../components/WhatsAppLink'
 import { vehicles } from '../data/vehicles'
 
 const markets = [
-  { name: 'United States', tag: 'USA', text: 'Explore a wide international vehicle market and request the make, model, year and specification that fit your needs.', image: 'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=900&q=85' },
-  { name: 'Dubai, UAE', tag: 'DUBAI', text: 'Tell us the vehicle you have in mind and let us help you understand sourcing options and the import journey.', image: 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=900&q=85' },
-  { name: 'Germany', tag: 'GERMANY', text: 'Request European vehicle options with the features, condition expectations and budget you specify.', image: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=900&q=85' },
+  { name: 'United States', tag: 'USA', text: 'Explore a wide international vehicle market and request the make, model, year and specification that fit your needs.', image: '/images/WhatsApp Image 2026-11-07 at 5.55.49 AM (2).jpeg' },
+  { name: 'Dubai, UAE', tag: 'DUBAI', text: 'Tell us the vehicle you have in mind and let us help you understand sourcing options and the import journey.', image: '/images/WhatsApp Image 2026-11-07 at 5.55.50 AM.jpeg' },
+  { name: 'Germany', tag: 'GERMANY', text: 'Request European vehicle options with the features, condition expectations and budget you specify.', image: '/images/WhatsApp Image 2026-11-07 at 5.55.50 AM (3).jpeg' },
+]
+const heroSlides = [
+  { image: '/images/WhatsApp Image 2026-11-07 at 5.55.52 AM (2).jpeg', alt: 'Zami Automobile car stand' },
+  { image: '/images/WhatsApp Image 2026-11-07 at 5.55.47 AM.jpeg', alt: 'Black Toyota Corolla at Zami' },
+  { image: '/images/WhatsApp Image 2026-11-07 at 5.55.47 AM (1).jpeg', alt: 'Silver Toyota sedan' },
+  { image: '/images/WhatsApp Image 2026-11-07 at 5.55.50 AM (3).jpeg', alt: 'White Lexus SUV' },
+]
+const suppliedPhotos = [
+  'WhatsApp Image 2026-11-07 at 5.55.47 AM (1).jpeg', 'WhatsApp Image 2026-11-07 at 5.55.47 AM (2).jpeg', 'WhatsApp Image 2026-11-07 at 5.55.47 AM.jpeg',
+  'WhatsApp Image 2026-11-07 at 5.55.48 AM (1).jpeg', 'WhatsApp Image 2026-11-07 at 5.55.48 AM (2).jpeg', 'WhatsApp Image 2026-11-07 at 5.55.48 AM (3).jpeg', 'WhatsApp Image 2026-11-07 at 5.55.48 AM.jpeg',
+  'WhatsApp Image 2026-11-07 at 5.55.49 AM (1).jpeg', 'WhatsApp Image 2026-11-07 at 5.55.49 AM (2).jpeg', 'WhatsApp Image 2026-11-07 at 5.55.49 AM (3).jpeg', 'WhatsApp Image 2026-11-07 at 5.55.49 AM.jpeg',
+  'WhatsApp Image 2026-11-07 at 5.55.50 AM (1).jpeg', 'WhatsApp Image 2026-11-07 at 5.55.50 AM (2).jpeg', 'WhatsApp Image 2026-11-07 at 5.55.50 AM (3).jpeg', 'WhatsApp Image 2026-11-07 at 5.55.50 AM.jpeg',
+  'WhatsApp Image 2026-11-07 at 5.55.51 AM (1).jpeg', 'WhatsApp Image 2026-11-07 at 5.55.51 AM (2).jpeg', 'WhatsApp Image 2026-11-07 at 5.55.51 AM.jpeg',
+  'WhatsApp Image 2026-11-07 at 5.55.52 AM (1).jpeg', 'WhatsApp Image 2026-11-07 at 5.55.52 AM (2).jpeg', 'WhatsApp Image 2026-11-07 at 5.55.52 AM.jpeg',
+  'WhatsApp Image 2026-11-07 at 5.55.53 AM (1).jpeg', 'WhatsApp Image 2026-11-07 at 5.55.53 AM.jpeg', 'WhatsApp Image 2026-11-07 at 5.55.54 AM.jpeg', 'WhatsApp Image 2026-11-07 at 5.55.56 AM.jpeg',
 ]
 const benefits = [
   { icon: Search, title: 'Sourcing around your brief', text: 'Share your preferred brand, model, year, budget and must-have features. We use your brief to guide the search.' },
@@ -24,9 +40,14 @@ const steps = [
 ]
 
 export default function Home() {
+  const [activeSlide, setActiveSlide] = useState(0)
+  useEffect(() => {
+    const timer = window.setInterval(() => setActiveSlide(index => (index + 1) % heroSlides.length), 5000)
+    return () => window.clearInterval(timer)
+  }, [])
   return <>
     <section className="hero">
-      <div className="hero-image" />
+      {heroSlides.map((slide, index) => <div key={slide.image} className={`hero-image ${index === activeSlide ? 'hero-image-active' : ''}`} style={{ backgroundImage: `url("${slide.image}")` }} role="img" aria-label={slide.alt} />)}
       <div className="hero-shade" />
       <div className="container hero-content">
         <span className="hero-kicker"><span /> INTERNATIONAL VEHICLE SOURCING & IMPORT</span>
@@ -39,6 +60,7 @@ export default function Home() {
         <div className="hero-proof"><span><CheckCircle2 size={16}/> Personalised vehicle requests</span><span><CheckCircle2 size={16}/> Multiple sourcing markets</span><span><CheckCircle2 size={16}/> Direct enquiry support</span></div>
       </div>
       <div className="hero-side-label">AI ZAMI VENTURES & AUTOS — AKWA IBOM, NIGERIA</div>
+      <div className="hero-dots" aria-label="Choose hero slide">{heroSlides.map((slide, index) => <button key={slide.image} aria-label={`Show slide ${index + 1}: ${slide.alt}`} aria-current={index === activeSlide} onClick={() => setActiveSlide(index)} />)}</div>
     </section>
 
     <section className="trust-strip">
@@ -55,6 +77,10 @@ export default function Home() {
         <div><span className="eyebrow">WELCOME TO AI ZAMI</span><h2>More than finding a car.<br/><span>Making the journey clearer.</span></h2></div>
         <div><p>Buying a vehicle from another country can involve many moving parts: choosing the right specification, checking condition information, understanding costs, arranging shipping and planning delivery. AI Zami Ventures & Autos is here to help you approach those decisions with better information and a clear point of contact.</p><Link to="/about" className="text-link">Get to know us <ArrowUpRight size={17}/></Link></div>
       </div>
+    </section>
+
+    <section className="section section-soft section-pad">
+      <div className="container"><SectionHeading eyebrow="AT ZAMI AUTOMOBILE" title="A closer look at our cars and stand" text="Browse the latest photos from Zami Automobile."/><div className="photo-gallery">{suppliedPhotos.map((photo, index) => <img key={photo} src={`/images/${photo}`} alt={`Zami Automobile vehicle and stand photo ${index + 1}`} loading="lazy" />)}</div></div>
     </section>
 
     <section className="section section-soft section-pad">
