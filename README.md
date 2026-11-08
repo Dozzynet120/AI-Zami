@@ -44,6 +44,4 @@ The site is configured for `+234 911 560 8176` (international WhatsApp format: `
 
 ## Manage the car gallery
 
-Open `/admin` on the deployed site and connect with a GitHub fine-grained personal access token for the `AI-Zami` repository. Grant the token **Contents: Read and write** access. Adding, editing or removing a vehicle saves the shared content file to the `main` branch, so the Home gallery, vehicle listings and Place an Order page stay in sync. If the website host deploys from GitHub, it will publish the new gallery after the commit.
-
-The admin page keeps the token in memory only; it clears when the page is refreshed or closed. New photos must be JPG, PNG or WebP and under 10 MB.
+Open `/admin` on the deployed Vercel site and sign in with the admin credentials configured in Vercel. Adding, editing or removing a vehicle updates the shared Vercel Blob content used by the Home gallery, vehicle listings and Place an Order page. New photos are stored in Vercel Blob and persist across refreshes and site deployments. Setup instructions are in `DEPLOYMENT.md`. Do not use a weak default password on a public domain.

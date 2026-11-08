@@ -16,6 +16,11 @@ export const defaultSiteContent = { vehicles: defaultVehicles, gallery: defaultG
 
 export async function loadSiteContent() {
   try {
+    const shared = await fetch('/api/content', { cache: 'no-store' })
+    if (shared.ok) {
+      const content = await shared.json()
+      if (Array.isArray(content.vehicles) && Array.isArray(content.gallery)) return content
+    }
     const response = await fetch('/site-content.json', { cache: 'no-store' })
     if (!response.ok) throw new Error('Site content is unavailable')
     const content = await response.json()
