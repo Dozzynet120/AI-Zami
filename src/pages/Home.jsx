@@ -5,6 +5,7 @@ import SectionHeading from '../components/SectionHeading'
 import VehicleCard from '../components/VehicleCard'
 import WhatsAppLink from '../components/WhatsAppLink'
 import { vehicles } from '../data/vehicles'
+import { defaultGallery, loadSiteContent } from '../data/siteContent'
 
 const markets = [
   { name: 'United States', tag: 'USA', text: 'Explore a wide international vehicle market and request the make, model, year and specification that fit your needs.', image: '/images/WhatsApp Image 2026-11-07 at 5.55.49 AM (2).jpeg' },
@@ -16,15 +17,6 @@ const heroSlides = [
   { image: '/images/WhatsApp Image 2026-11-07 at 5.55.47 AM.jpeg', alt: 'Black Toyota Corolla at Zami' },
   { image: '/images/WhatsApp Image 2026-11-07 at 5.55.47 AM (1).jpeg', alt: 'Silver Toyota sedan' },
   { image: '/images/WhatsApp Image 2026-11-07 at 5.55.50 AM (3).jpeg', alt: 'White Lexus SUV' },
-]
-const suppliedPhotos = [
-  'WhatsApp Image 2026-11-07 at 5.55.47 AM (1).jpeg', 'WhatsApp Image 2026-11-07 at 5.55.47 AM (2).jpeg', 'WhatsApp Image 2026-11-07 at 5.55.47 AM.jpeg',
-  'WhatsApp Image 2026-11-07 at 5.55.48 AM (1).jpeg', 'WhatsApp Image 2026-11-07 at 5.55.48 AM (2).jpeg', 'WhatsApp Image 2026-11-07 at 5.55.48 AM (3).jpeg', 'WhatsApp Image 2026-11-07 at 5.55.48 AM.jpeg',
-  'WhatsApp Image 2026-11-07 at 5.55.49 AM (1).jpeg', 'WhatsApp Image 2026-11-07 at 5.55.49 AM (2).jpeg', 'WhatsApp Image 2026-11-07 at 5.55.49 AM (3).jpeg', 'WhatsApp Image 2026-11-07 at 5.55.49 AM.jpeg',
-  'WhatsApp Image 2026-11-07 at 5.55.50 AM (1).jpeg', 'WhatsApp Image 2026-11-07 at 5.55.50 AM (2).jpeg', 'WhatsApp Image 2026-11-07 at 5.55.50 AM (3).jpeg', 'WhatsApp Image 2026-11-07 at 5.55.50 AM.jpeg',
-  'WhatsApp Image 2026-11-07 at 5.55.51 AM (1).jpeg', 'WhatsApp Image 2026-11-07 at 5.55.51 AM (2).jpeg', 'WhatsApp Image 2026-11-07 at 5.55.51 AM.jpeg',
-  'WhatsApp Image 2026-11-07 at 5.55.52 AM (1).jpeg', 'WhatsApp Image 2026-11-07 at 5.55.52 AM (2).jpeg', 'WhatsApp Image 2026-11-07 at 5.55.52 AM.jpeg',
-  'WhatsApp Image 2026-11-07 at 5.55.53 AM (1).jpeg', 'WhatsApp Image 2026-11-07 at 5.55.53 AM.jpeg', 'WhatsApp Image 2026-11-07 at 5.55.54 AM.jpeg', 'WhatsApp Image 2026-11-07 at 5.55.56 AM.jpeg',
 ]
 const benefits = [
   { icon: Search, title: 'Sourcing around your brief', text: 'Share your preferred brand, model, year, budget and must-have features. We use your brief to guide the search.' },
@@ -41,8 +33,11 @@ const steps = [
 
 export default function Home() {
   const [activeSlide, setActiveSlide] = useState(0)
+  const [vehicleList, setVehicleList] = useState(vehicles)
+  const [gallery, setGallery] = useState(defaultGallery)
   useEffect(() => {
     const timer = window.setInterval(() => setActiveSlide(index => (index + 1) % heroSlides.length), 5000)
+    loadSiteContent().then(content => { setVehicleList(content.vehicles); setGallery(content.gallery) })
     return () => window.clearInterval(timer)
   }, [])
   return <>
@@ -80,7 +75,7 @@ export default function Home() {
     </section>
 
     <section className="section section-soft section-pad">
-      <div className="container"><SectionHeading eyebrow="AT ZAMI AUTOMOBILE" title="A closer look at our cars and stand" text="Browse the latest photos from Zami Automobile."/><div className="photo-gallery">{suppliedPhotos.map((photo, index) => <img key={photo} src={`/images/${photo}`} alt={`Zami Automobile vehicle and stand photo ${index + 1}`} loading="lazy" />)}</div></div>
+      <div className="container"><SectionHeading eyebrow="AT ZAMI AUTOMOBILE" title="A closer look at our cars and stand" text="Browse the latest photos from Zami Automobile."/><div className="photo-gallery">{gallery.map((photo, index) => <img key={photo} src={photo.startsWith('/') ? photo : `/images/${photo}`} alt={`Zami Automobile photo ${index + 1}`} loading="lazy" />)}{vehicleList.map(vehicle => <img key={`vehicle-${vehicle.id}`} src={vehicle.image} alt={`${vehicle.year} ${vehicle.name}`} loading="lazy" />)}</div></div>
     </section>
 
     <section className="section section-soft section-pad">
@@ -93,7 +88,7 @@ export default function Home() {
     <section className="section section-pad">
       <div className="container">
         <div className="section-topline"><SectionHeading eyebrow="VEHICLE INSPIRATION" title="What are you looking to drive?" text="Browse examples of vehicle categories and models customers commonly ask about. Listings shown here are illustrative sourcing examples, not confirmed live stock."/><Link to="/cars" className="btn btn-outline">View all vehicle options <ArrowRight size={17}/></Link></div>
-        <div className="vehicle-grid">{vehicles.slice(0,3).map(v => <VehicleCard key={v.id} vehicle={v}/>)}</div>
+        <div className="vehicle-grid">{vehicleList.slice(0,3).map(v => <VehicleCard key={v.id} vehicle={v}/>)}</div>
       </div>
     </section>
 

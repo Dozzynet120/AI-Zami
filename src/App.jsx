@@ -9,6 +9,7 @@ import Import from './pages/Import'
 import About from './pages/About'
 import Contact from './pages/Contact'
 import Order from './pages/Order'
+import Admin from './pages/Admin'
 
 export default function App() {
   const location = useLocation()
@@ -20,6 +21,7 @@ export default function App() {
       '/about': 'About Us | AI Zami Ventures & Autos',
       '/contact': 'Contact Us | AI Zami Ventures & Autos',
       '/order': 'Place a Vehicle Order | AI Zami Ventures & Autos',
+      '/admin': 'Site Admin | AI Zami Ventures & Autos',
     }
     document.title = titles[location.pathname] || titles['/']
     window.scrollTo({ top: 0, behavior: 'instant' })
@@ -36,6 +38,7 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/order" element={<Order />} />
+          <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<Home />} />
         </Routes>
       </main>

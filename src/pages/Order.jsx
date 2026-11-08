@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { CarFront, MapPin, Truck, Store, ShieldCheck, Clock3, Copy, CheckCircle2, AlertCircle, ArrowRight, X } from 'lucide-react'
 import { vehicles } from '../data/vehicles'
+import { loadSiteContent } from '../data/siteContent'
 import { whatsappUrl } from '../components/WhatsAppLink'
 
 const PAYMENT_WINDOW_SECONDS = 15 * 60
@@ -19,6 +20,7 @@ const PAYMENT_DETAILS = {
 }
 
 export default function Order() {
+  const [vehicleList, setVehicleList] = useState(vehicles)
   const [selectedId, setSelectedId] = useState(String(vehicles[0]?.id || ''))
   const [customer, setCustomer] = useState({ name: '', phone: '', email: '' })
   const [delivery, setDelivery] = useState('pickup')
@@ -30,7 +32,16 @@ export default function Order() {
   const [copied, setCopied] = useState(false)
   const [errors, setErrors] = useState(false)
 
-  const selectedCar = useMemo(() => vehicles.find(v => String(v.id) === selectedId), [selectedId])
+  const selectedCar = useMemo(() => vehicleList.find(v => String(v.id) === selectedId), [vehicleList, selectedId])
+
+  useEffect(() => {
+    loadSiteContent().then(content => {
+      setVehicleList(content.vehicles)
+      if (!content.vehicles.some(vehicle => String(vehicle.id) === selectedId)) {
+        setSelectedId(String(content.vehicles[0]?.id || ''))
+      }
+    })
+  }, [])
 
   useEffect(() => {
     if (!modalOpen || seconds <= 0 || paymentSubmitted) return
@@ -80,7 +91,7 @@ export default function Order() {
         <div className="order-main">
           <div className="order-step-heading"><span>01</span><div><h2>Select your vehicle</h2><p>Choose from the current vehicle examples. Listings remain illustrative until confirmed with our team.</p></div></div>
           <div className="order-car-grid">
-            {vehicles.map(v => <button type="button" key={v.id} onClick={() => setSelectedId(String(v.id))} className={`order-car-option ${selectedId === String(v.id) ? 'selected' : ''}`}>
+            {vehicleList.map(v => <button type="button" key={v.id} onClick={() => setSelectedId(String(v.id))} className={`order-car-option ${selectedId === String(v.id) ? 'selected' : ''}`}>
               <img src={v.image} alt={`${v.year} ${v.name}`} />
               <span className="order-car-check">{selectedId === String(v.id) ? '✓' : ''}</span>
               <span className="order-car-copy"><small>{v.year} • {v.origin}</small><strong>{v.name}</strong><em>Request quotation</em></span>

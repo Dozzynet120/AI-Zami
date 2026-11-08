@@ -27,6 +27,7 @@ The production website is generated in `dist/`.
 - `/import` — Import and sourcing service
 - `/about` — About the business
 - `/contact` — Contact and enquiry form
+- `/admin` — Private vehicle gallery management
 
 Each page has its own React component in `src/pages/`. Shared navigation, footer, vehicle cards, WhatsApp links and other reusable UI live in `src/components/`.
 
@@ -39,4 +40,10 @@ Each page has its own React component in `src/pages/`. Shared navigation, footer
 
 ## WhatsApp
 
-The site is configured for `+234810062440` (international WhatsApp format: `234810062440`).
+The site is configured for `+234 911 560 8176` (international WhatsApp format: `2349115608176`).
+
+## Manage the car gallery
+
+Open `/admin` on the deployed site and connect with a GitHub fine-grained personal access token for the `AI-Zami` repository. Grant the token **Contents: Read and write** access. Adding, editing or removing a vehicle saves the shared content file to the `main` branch, so the Home gallery, vehicle listings and Place an Order page stay in sync. If the website host deploys from GitHub, it will publish the new gallery after the commit.
+
+The admin page keeps the token in memory only; it clears when the page is refreshed or closed. New photos must be JPG, PNG or WebP and under 10 MB.

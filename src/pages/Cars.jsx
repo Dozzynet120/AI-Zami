@@ -1,20 +1,23 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Search, SlidersHorizontal, ArrowUpRight, Info } from 'lucide-react'
 import SectionHeading from '../components/SectionHeading'
 import VehicleCard from '../components/VehicleCard'
 import WhatsAppLink from '../components/WhatsAppLink'
 import { vehicles } from '../data/vehicles'
+import { loadSiteContent } from '../data/siteContent'
 
 export default function Cars() {
   const [search,setSearch] = useState('')
   const [origin,setOrigin] = useState('All markets')
   const [sort,setSort] = useState('Recommended')
+  const [vehicleList,setVehicleList] = useState(vehicles)
+  useEffect(() => { loadSiteContent().then(content => setVehicleList(content.vehicles)) }, [])
   const filtered = useMemo(() => {
-    let list = vehicles.filter(v => `${v.name} ${v.year} ${v.trim} ${v.origin}`.toLowerCase().includes(search.toLowerCase()) && (origin === 'All markets' || v.origin === origin))
+    let list = vehicleList.filter(v => `${v.name} ${v.year} ${v.trim} ${v.origin}`.toLowerCase().includes(search.toLowerCase()) && (origin === 'All markets' || v.origin === origin))
     if (sort === 'Newest first') list = [...list].sort((a,b)=>Number(b.year)-Number(a.year))
     if (sort === 'Oldest first') list = [...list].sort((a,b)=>Number(a.year)-Number(b.year))
     return list
-  },[search,origin,sort])
+  },[vehicleList,search,origin,sort])
   return <>
     <section className="page-hero page-hero-cars"><div className="container page-hero-content"><span className="eyebrow">VEHICLE OPTIONS</span><h1>Find the vehicle<br/><em>that fits your life.</em></h1><p>From practical daily drivers to premium SUVs and executive vehicles, start with the car you want and let’s discuss sourcing possibilities.</p></div></section>
     <section className="section section-pad">

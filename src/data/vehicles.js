@@ -1,9 +1,9 @@
 export const vehicles = [
   {
-    id: 1, name: 'Lexus LX 600', year: '2025', trim: 'LX 600 • Automatic', origin: 'USA',
+    id: 1, name: 'Lexus TX 550H+', year: '2025', trim: '550H+ • Automatic', origin: 'USA',
     price: 'Request price', status: 'Sourcing available', fuel: 'Petrol', transmission: 'Automatic',
     image: '/images/WhatsApp Image 2026-11-07 at 5.55.49 AM (2).jpeg',
-    description: 'A full-size luxury SUV with a spacious cabin, refined comfort and confident road presence.'
+    description: 'A premium three-row Lexus SUV combining a spacious interior with a hybrid powertrain.'
   },
   {
     id: 2, name: 'Toyota LandCruiser GXR', year: '2026', trim: 'GXR • Automatic', origin: 'Dubai',
@@ -12,10 +12,10 @@ export const vehicles = [
     description: 'A full-size Toyota SUV with generous space and the capability expected from the Land Cruiser range.'
   },
   {
-    id: 3, name: 'Lexus TX 550H+', year: '2025', trim: '550H+ • Automatic', origin: 'USA',
+    id: 3, name: 'Lexus LX 600', year: '2025', trim: 'LX 600 • Automatic', origin: 'USA',
     price: 'Request price', status: 'Sourcing available', fuel: 'Hybrid', transmission: 'Automatic',
     image: '/images/WhatsApp Image 2026-11-07 at 5.55.50 AM (3).jpeg',
-    description: 'A premium three-row Lexus SUV combining a spacious interior with a hybrid powertrain.'
+    description: 'A full-size luxury SUV with a spacious cabin, refined comfort and confident road presence.'
   },
   {
     id: 4, name: 'Toyota Camry SE', year: '2009', trim: 'SE • Automatic', origin: 'USA',

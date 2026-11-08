@@ -22,7 +22,7 @@ export default function Footer() {
         <div className="footer-contact">
           <h4>Get in touch</h4>
           <p><MapPin size={17} /> Akwa Ibom State, Nigeria</p>
-          <a href="https://wa.me/2348100062440" target="_blank" rel="noreferrer"><Phone size={17} /> +234 810 006 2440</a>
+          <a href="https://wa.me/2349115608176" target="_blank" rel="noreferrer"><Phone size={17} /> +234 911 560 8176</a>
           <p className="small-muted">For enquiries, availability and quotations, message our team on WhatsApp.</p>
         </div>
       </div>
