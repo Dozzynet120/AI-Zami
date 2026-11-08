@@ -14,7 +14,7 @@ export default function Header() {
     <header className="site-header">
       <div className="container header-inner">
         <Link to="/" className="brand" onClick={() => setOpen(false)}>
-          <img src="/logo.svg" alt="AI Zami Ventures & Autos" />
+          <img src="/logo.png" alt="AI Zami Ventures & Autos" />
         </Link>
         <button className="menu-toggle" aria-label="Toggle navigation" onClick={() => setOpen(!open)}>
           {open ? <X /> : <Menu />}

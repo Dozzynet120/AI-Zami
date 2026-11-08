@@ -7,7 +7,7 @@ export default function Footer() {
     <footer className="site-footer">
       <div className="container footer-main">
         <div className="footer-brand">
-          <img src="/logo.svg" alt="AI Zami Ventures & Autos" />
+          <img src="/logo.png" alt="AI Zami Ventures & Autos" />
           <p>Making international vehicle sourcing clearer, more convenient and more customer-focused for buyers in Akwa Ibom and across Nigeria.</p>
           <WhatsAppLink message="Hello AI Zami Ventures & Autos. I found your website and would like to make an enquiry." />
         </div>
